@@ -1,4 +1,4 @@
-export default function sieve(max) {
+exports.sieve = (max) => {
 	const isPrime = new Array(max + 1).fill(true);
 
 	primes = [];
@@ -17,4 +17,4 @@ export default function sieve(max) {
 	}
 
 	return primes;
-}
+};

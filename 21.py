@@ -1,15 +1,18 @@
-def d(n):
-    return sum([i for i in range(1, n) if n % i == 0])
+def amicable(n):
+    amicable = set()
 
-amicable = set()
+    def pd(x): return [i for i in range(1, x) if x % i == 0]
 
-for a in range(1, 10000):
-    if a in amicable:
-        continue
+    for a in range(1, n):
+        if a in amicable:
+            continue
 
-    a_val = d(a)
+        b = sum(pd(a))
 
-    if d(a_val) == a and a != a_val:
-        amicable.update([a, a_val])
+        if sum(pd(b)) == a and a != b:
+            amicable.update([a, b])
 
-print(sum(amicable))
+    return amicable
+
+
+print(sum(amicable(10000)))

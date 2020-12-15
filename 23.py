@@ -1,29 +1,21 @@
-def get_factors(n):
-    factors = set()
-    for i in range(1, int(n**0.5)+1):
-        if (n % i == 0):
-            factors.add(i)
-            factors.add(n//i)
-
-    return factors
+from itertools import combinations_with_replacement
 
 
-def is_abundant(n):
-    return sum(get_factors(n)) > n
+def divisors(n):
+    return [x for x in range(1, n) if n % x == 0]
 
 
-nums = []
+# First, calculate a list of all abundant numbers up to 28123.
+abundants = set(n for n in range(1, 28124) if sum(divisors(n)) > n)
 
-for i in range(1, 28124):
-    for a in range(1, i):
-        for b in range(1, i-a+1):
-            # print(i, a, b)
-            if sum([a, b]) == i and is_abundant(a) and is_abundant(b):
-                break
-        else:
-            continue
-        break
+abundant_sums = set(map(sum, combinations_with_replacement(abundants, 2)))
 
-    nums.append(i)
+print("Finished generating abundant sums!")
+print("Beginning search...")
 
-print(nums)
+ans = 0
+for n in range(28124):
+    if n not in abundant_sums:
+        ans += n
+
+print(ans)
